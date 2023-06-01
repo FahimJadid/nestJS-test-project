@@ -1,15 +1,26 @@
-import { Controller, Post, Req, Header, HttpCode } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Req,
+  Get,
+  Header,
+  HttpCode,
+  Redirect,
+} from '@nestjs/common';
 import { Request } from 'express';
 
 @Controller('/users')
 export class UsersController {
   @Post('/profile')
-  @Header('Cache-Control', 'none')
-  @Header('X-name', 'jadid')
-  @HttpCode(200)
+  @Redirect('/users/account', 302)
   getProfile(@Req() req: Request) {
     return {
       hello: 'Jadid',
     };
+  }
+
+  @Get('/account')
+  redirectRoute() {
+    return 'Redirected Account';
   }
 }
