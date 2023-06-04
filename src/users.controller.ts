@@ -1,26 +1,16 @@
-import {
-  Controller,
-  Post,
-  Req,
-  Get,
-  Header,
-  HttpCode,
-  Redirect,
-} from '@nestjs/common';
-import { Request } from 'express';
+import { Controller, Get, Param } from '@nestjs/common';
+
+interface videoParams {
+  id: number;
+  name: string;
+}
 
 @Controller('/users')
 export class UsersController {
-  @Post('/profile')
-  @Redirect('/users/account', 302)
-  getProfile(@Req() req: Request) {
-    return {
-      hello: 'Jadid',
-    };
-  }
-
-  @Get('/account')
-  redirectRoute() {
-    return 'Redirected Account';
+  @Get('/videos/:id/:name')
+  getVideos(@Param() params: videoParams) {
+    console.log(params.id);
+    console.log(params.name);
+    return 'Success!';
   }
 }
