@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query, Headers } from '@nestjs/common';
 
 interface QueryParams {
   age: number;
@@ -8,8 +8,8 @@ interface QueryParams {
 @Controller('/users')
 export class UsersController {
   @Get('/videos')
-  getVideos(@Query() query: QueryParams) {
-    console.log(query.age, query.name);
+  getVideos(@Headers('user-agent') headers: Record<string, any>) {
+    console.log(headers);
     return 'Success!';
   }
 }
